@@ -26,6 +26,9 @@ def main() -> int:
     if not text.strip():
         print("gate fail: entry is only whitespace", file=sys.stderr)
         return 1
+    if "\n" in text or "\r" in text:
+        print("gate fail: entry must be a single line", file=sys.stderr)
+        return 1
     text.encode("utf-8")  # raises if not valid UTF-8
 
     out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
